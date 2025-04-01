@@ -1,0 +1,106 @@
+/* استيراد خط جميل */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background: linear-gradient(to right, #4b6cb7, #182848);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* تصميم الحاوية */
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 350px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* العنوان */
+h2 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+/* تنسيق الحقول */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* الزر */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #ff9800;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #e68900;
+}
+
+/* تنسيق الروابط */
+p {
+    color: #fff;
+    margin-top: 10px;
+}
+
+a {
+    color: #ff9800;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* تأثير التحميل */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* جعل التصميم متجاوب */
+@media (max-width: 400px) {
+    .container {
+        width: 90%;
+    }
+}

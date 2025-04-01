@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="log.css">
+    <script>
+        const dbUrl = "https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/ADMIN";
+        
+        async function login() {
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+            
+            try {
+                const response = await fetch(dbUrl);
+                const data = await response.json();
+                
+                const users = data.documents || [];
+                const user = users.find(doc => doc.fields.email.stringValue === email && doc.fields.password.stringValue === password);
+                
+                if (user) {
+                    alert("تم تسجيل الدخول بنجاح");
+                    window.location.href = "wep.html";
+                } else {
+                    alert("البريد الإلكتروني أو كلمة المرور غير صحيحة");
+                }
+            } catch (error) {
+                console.error("خطأ أثناء تسجيل الدخول", error);
+            }
+        }
+        
+        async function register() {
+            const name = document.getElementById("register-name").value;
+            const email = document.getElementById("register-email").value;
+            const password = document.getElementById("register-password").value;
+            
+            const userData = {
+                fields: {
+                    name: { stringValue: name },
+                    email: { stringValue: email },
+                    password: { stringValue: password }
+                }
+            };
+            
+            try {
+                const response = await fetch(dbUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(userData)
+                });
+                
+                if (response.ok) {
+                    alert("تم إنشاء الحساب بنجاح");
+                    window.location.href = "login.html";
+                } else {
+                    alert("حدث خطأ أثناء إنشاء الحساب");
+                }
+            } catch (error) {
+                console.error("خطأ أثناء إنشاء الحساب", error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>تسجيل الدخول</h2>
+        <input type="email" id="login-email" placeholder="البريد الإلكتروني">
+        <input type="password" id="login-password" placeholder="كلمة المرور">
+        <button onclick="login()">تسجيل الدخول</button>
+        <p>ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a></p>
+    </div>
+
+   
+</body>
+</html>

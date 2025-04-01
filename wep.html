@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الوافدين</title>
+    <link rel="stylesheet" href="csss.css">
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<body>
+    <video autoplay loop muted id="background-video">
+        <source src="background-video.mp4" type="video/mp4">
+    </video>
+    
+    <div class="overlay"></div>
+    
+    <div class="header">
+        <img src="photo\logo2.jpg" alt="Logo Right" class="logo">
+        <div class="header-title">موقع تسجيل الوافدين</div>
+        <img src="photo\logo1.jpg" alt="Logo Left" class="logo">
+    </div>
+    
+    <div class="sidebar">
+        <button onclick="loadContent('Nominations')"> الترشيحات </button>
+        <button onclick="loadContent('new')">تسجيل وافد جديد</button>
+        <button onclick="loadContent('activate')">تفعيل حساب وافد</button>
+        <button onclick="loadContent('update')">تحديث بيانات الحسابات  </button>
+        <button onclick="loadContent('reports')">طباعة تقارير</button>
+        <button onclick="loadContent('fees')">رسوم الخدمات</button>
+        <button onclick="loadContent('help')"> فيديو تعريفي </button>
+    </div>
+    
+    <div class="content" id="content">اختر خيارًا من القائمة لعرضه هنا</div>
+    
+    <div class="footer">
+        <img src="photo\photo_2025-02-18_19-50-28.jpg" alt="Footer Logo" class="footer-logo"><div class="header-title">تطوير محمد السيد عبد الفتاح @  </div>
+    </div>
+    
+    <script> 
+     
+        function loadContent(type) {
+            const content = document.getElementById('content');
+            content.innerHTML = ''; 
+            
+            switch(type) {
+                case 'fees':
+    content.innerHTML = `
+        <h2 style="color: #007bff; text-align: center;">الرسوم المقررة للطلاب الوافدين</h2>
+
+<div style="max-width: 900px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <table border="1" id="feesTable" style="width: 100%; text-align: right; border-radius: 8px; border-collapse: collapse;">
+        <thead style="background-color: #007bff; color: white;">
+            <tr>
+                <th style="padding: 12px; font-weight: bold;">الخدمة</th>
+                <th style="padding: 12px; font-weight: bold;">القيمة (بالدولار)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td style="padding: 10px;">استخراج شهادة أو افادة نجاح باللغة العربية أو الإنجليزية</td><td style="padding: 10px;">$30</td></tr>
+            <tr><td style="padding: 10px;">استخراج شهادة التخرج</td><td style="padding: 10px;">$100</td></tr>
+            <tr><td style="padding: 10px;">الشهادة الكرتونية</td><td style="padding: 10px;">$150</td></tr>
+            <tr><td style="padding: 10px;">إيقاف قيد أو اعتذار عن دخول الامتحان فصل دراسي /مقرر دراسي أو أكثر</td><td style="padding: 10px;">$20</td></tr>
+            <tr><td style="padding: 10px;">استخراج شهادة الدرجات باللغة العربية أو الإنجليزية أو أي لغة أخرى</td><td style="padding: 10px;">$30</td></tr>
+            <tr><td style="padding: 10px;">استخراج بيان حالة / إفادة / إثبات قيد</td><td style="padding: 10px;">$20</td></tr>
+            <tr><td style="padding: 10px;">تدقيق صحة الشهادات أو بيان الدرجات للخريجين</td><td style="padding: 10px;">$30</td></tr>
+            <tr><td style="padding: 10px;">رسم الالتماس عن كل مقرر دراسي</td><td style="padding: 10px;">$20</td></tr>
+            <tr><td style="padding: 10px;">بيان بالمحتوى العلمي للمقررات التي تم دراستها</td><td style="padding: 10px;">$50</td></tr>
+            <tr><td style="padding: 10px;">الكشف الطبي</td><td style="padding: 10px;">$30</td></tr>
+            <tr><td style="padding: 10px;">شهادة حسن سير وسلوك</td><td style="padding: 10px;">$30</td></tr>
+            <tr><td style="padding: 10px;">طلب إجراء المقاصة العلمية</td><td style="padding: 10px;">$150 للجامعة المحول إليها</td></tr>
+            <tr><td style="padding: 10px;">شهادة الامتياز</td><td style="padding: 10px;">$100</td></tr>
+            <tr><td style="padding: 10px;">رسوم امتحان القدرات</td><td style="padding: 10px;">$100</td></tr>
+            <tr><td style="padding: 10px;">المحتوى العلمي للمقررات على المنصة التعليمية</td><td style="padding: 10px;">$150 عن الفصل الدراسي</td></tr>
+            <tr><td style="padding: 10px;">استخراج كارنية لأول مرة</td><td style="padding: 10px;">بدون رسوم</td></tr>
+            <tr><td style="padding: 10px;">استخراج بدل فاقد كارنية</td><td style="padding: 10px;">$30</td></tr>
+            <tr><td style="padding: 10px;">طلب سحب الملف</td><td style="padding: 10px;">بدون رسوم</td></tr>
+            <tr><td style="padding: 10px;">بنك المعرفة</td><td style="padding: 10px;">$100 للعام الدراسي</td></tr>
+            <tr><td style="padding: 10px;">شهادة فصل عربي / إنجليزي</td><td style="padding: 10px;">$10</td></tr>
+        </tbody>
+    </table>
+</div>
+
+    `;
+    break;
+
+
+               case 'Nominations':
+    content.innerHTML = `
+       <h2 style="text-align: center; color: #007bff; font-family: Arial, sans-serif;">قائمة الترشيحات</h2>
+<button id="fetchNominationsBtn" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: Arial, sans-serif; display: block; margin: 0 auto;">
+    إظهار الترشيحات
+</button>
+
+<div id="nominationsList" style="display: none; margin-top: 20px;">
+    <h3 style="color: #333; font-family: Arial, sans-serif;">الترشيحات المتاحة</h3>
+    <table border="1" id="nominationsTable" style="width: 100%; text-align: right; border-collapse: collapse; margin-top: 10px; border-radius: 8px;">
+        <thead style="background-color: #007bff; color: white;">
+            <tr>
+                <th style="padding: 12px;">اسم المستخدم</th>
+                <th style="padding: 12px;">الكلية</th>
+                <th style="padding: 12px;">رقم الطلب</th>
+                <th style="padding: 12px;">تحديث</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- البيانات هنا ستظهر بواسطة JavaScript -->
+        </tbody>
+    </table>
+    <button id="updateNominationsBtn" style="display: none; background-color: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: Arial, sans-serif; margin-top: 20px; width: 100%; max-width: 200px; margin: 0 auto;">
+        تحديث الترشيحات
+    </button>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2, h3 {
+        font-family: 'Tahoma', sans-serif;
+        color: #2c3e50;
+    }
+
+    button {
+        font-family: Arial, sans-serif;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+        transition: opacity 0.3s ease;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+
+    table th, table td {
+        padding: 10px;
+        text-align: center;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    table th {
+        background-color: #007bff;
+        color: white;
+    }
+</style>
+
+    `;
+
+    window.fetchNominations = function () {
+        let docPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/nomination`;
+        console.log("Fetching nominations from:", docPath);
+
+        fetch(docPath)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Firestore response:", data);
+                if (data.documents) {
+                    let tableBody = document.getElementById("nominationsTable").querySelector("tbody");
+                    tableBody.innerHTML = "";
+
+                    data.documents.forEach(doc => {
+                        let fields = doc.fields;
+                        let username = fields.username ? fields.username.stringValue : "";
+                        let college = fields.college ? fields.college.stringValue : "";
+                        let requestNumber = fields.requestNumber ? fields.requestNumber.stringValue : "";
+                        let docId = doc.name.split("/").pop();
+
+                        let row = `<tr>
+                            <td><input type="text" value="${username}" data-doc-id="${docId}" class="usernameInput"></td>
+                            <td><input type="text" value="${college}" data-doc-id="${docId}" class="collegeInput"></td>
+                            <td>${requestNumber}</td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+
+                    document.getElementById("nominationsList").style.display = "block";
+                    document.getElementById("updateNominationsBtn").style.display = "block";
+                } else {
+                    alert("لم يتم العثور على ترشيحات.");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching nominations:", error);
+                alert("حدث خطأ أثناء جلب الترشيحات.");
+            });
+    };
+
+    window.updateNominations = function () {
+        let updatedData = [];
+        document.querySelectorAll(".usernameInput, .collegeInput").forEach(input => {
+            let docId = input.getAttribute("data-doc-id");
+            let fieldName = input.classList.contains("usernameInput") ? "username" : "college";
+            let value = input.value.trim();
+            updatedData.push({ docId, fieldName, value });
+        });
+
+        updatedData.forEach(({ docId, fieldName, value }) => {
+            let docPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/nomination/${docId}`;
+            
+            fetch(docPath)
+                .then(response => response.json())
+                .then(data => {
+                    let existingFields = data.fields || {};
+                    existingFields[fieldName] = { stringValue: value };
+                    
+                    return fetch(docPath, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ fields: existingFields })
+                    });
+                })
+                .then(() => console.log(`Updated ${fieldName} for document ${docId}`))
+                .catch(error => console.error("Error updating nomination:", error));
+        });
+        alert("تم تحديث البيانات بنجاح!");
+    };
+
+    document.getElementById("fetchNominationsBtn").addEventListener("click", fetchNominations);
+    document.getElementById("updateNominationsBtn").addEventListener("click", updateNominations);
+    break;
+
+
+                case 'new':
+    let formContainer = document.createElement('div');
+    formContainer.style.display = 'block';
+    formContainer.style.background = '#f9f9f9';
+    formContainer.style.padding = '20px';
+    formContainer.style.borderRadius = '10px';
+    formContainer.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+    formContainer.style.maxWidth = '600px';
+    formContainer.style.margin = 'auto';
+    
+    let title = document.createElement('h2');
+    title.textContent = 'تسجيل وافد جديد';
+    formContainer.appendChild(title);
+    
+    function createLabel(text, inputElement) {
+        let label = document.createElement('label');
+        label.textContent = text;
+        label.style.display = 'block';
+        label.style.margin = '10px 0 5px';
+        label.style.fontWeight = 'bold';
+        label.appendChild(inputElement);
+        return label;
+    }
+    
+    function createInput(type, id) {
+        let input = document.createElement('input');
+        input.type = type;
+        input.id = id;
+        input.style.width = '100%';
+        input.style.padding = '8px';
+        input.style.marginBottom = '10px';
+        input.style.border = '1px solid #ccc';
+        input.style.borderRadius = '5px';
+        return input;
+    }
+    
+    function createSelect(id, options) {
+        let select = document.createElement('select');
+        select.id = id;
+        select.style.width = '100%';
+        select.style.padding = '8px';
+        select.style.marginBottom = '10px';
+        select.style.border = '1px solid #ccc';
+        select.style.borderRadius = '5px';
+        options.forEach(opt => {
+            let option = document.createElement('option');
+            option.value = opt;
+            option.textContent = opt;
+            select.appendChild(option);
+        });
+        return select;
+    }
+    
+    let fields = [
+                    { label: 'رقم الطلب/ رقم النموذج:', id: 'requestNumber', type: 'text' },
+                            { label: 'الاســـــــــــــــــــم:', id: 'username', type: 'text' },
+                            { label: 'الجنسية:', id: 'nationality', type: 'select', options: ['مصر', 'السودان', ' ليبيا', ' تونس', 'الجزائر', 'المغرب', 'موريتانيا', ' الصومال', 'جيبوتي', 'جزر القمر', 'الأردن', 'سوريا', 'لبنان', ' فلسطين', 'العراق', 'الإمارات العربية المتحدة', 'البحرين', 'الكويت', 'السعودية', 'اليمن', 'قطر', 'عُمان', 'الصين'] },
+                            { label: 'الرقم المدني:', id: 'civilId', type: 'text' },
+                            { label: 'النوع:', id: 'gender', type: 'select', options: ['ذكر', 'أنثى'] },
+                            { label: 'الكلية:', id: 'college', type: 'select', options: [' كلية التجارة ', 'كلية التربية  ', 'كلية التربية الرياضية بنات ', 'كلية التربية الرياضية بنين ', 'كلية التربية النوعية ', 'كلية التكنولوجيا والتنمية ', 'كلية التمريض ', 'كلية الحاسبات والمعلومات ', 'كلية الحقوق ', 'كلية الدراسات الآسيوية العليا', 'كلية الزراعة ', 'كلية الصيدلة ', 'كلية الطب البيطري', 'كلية العلوم', 'كلية الهندسة '] },
+                            { label: 'الفرقة أو الدرجة العلمية:', id: 'level', type: 'select', options: ['الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة', 'السابعة'] },
+                            { label: 'دولة الشهادة:', id: 'certificateCountry', type: 'text' },
+                            { label: 'عام الالتحاق:', id: 'enrollmentYear', type: 'select', options: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032', '2033', '2034', '2035', '2036', '2037', '2038', '2039', '2040'] },
+                            { label: 'موقف الطالب:', id: 'studentStatus', type: 'select', options: ['منحة', 'نفقة خاصة', 'تخفيض 50%'] },
+                            { label: 'حالة الطالب:', id: 'studentCondition', type: 'select', options: ['مستجد', 'باقي'] },
+                            { label: 'التخصص:', id: 'major', type: 'text' },
+                            { label: 'تاريخ الميلاد:', id: 'birthDate', type: 'date' },
+                            { label: 'محل الإقامة:', id: 'address', type: 'text' },
+                            { label: 'الايميل:', id: 'email', type: 'email' },
+                            { label: 'رقم التليفون:', id: 'phone', type: 'text' },
+                            { label: 'الرسوم المقررة:', id: 'fees', type: 'text' },
+                            { label: 'قسط 1:', id: 'installment1', type: 'text' },
+                            { label: 'تاريخ السداد 1:', id: 'paymentDate1', type: 'date' },
+                            { label: 'رقم الحافظة/ رقم العملية (1):', id: 'transaction1', type: 'text' },
+                            { label: 'قسط 2:', id: 'installment2', type: 'text' },
+                            { label: 'تاريخ السداد 2:', id: 'paymentDate2', type: 'date' },
+                            { label: 'رقم الحافظة/ رقم العملية (2):', id: 'transaction2', type: 'text' },
+                            { label: 'اجمال المدفوع للعام الدراسي الأول :', id: 'totalPaid1', type: 'text' },
+                            { label: 'اجمال المدفوع للعام الدراسي الثاني :', id: 'totalPaid2', type: 'text' },
+                            { label: 'اجمال المدفوع للعام الدراسي الثالث :', id: 'totalPaid3', type: 'text' },
+                            { label: 'اجمال المدفوع للعام الدراسي الرابع :', id: 'totalPaid4', type: 'text' },
+                            { label: 'اجمال المدفوع للعام الدراسي الخامس :', id: 'totalPaid5', type: 'text' },
+                            { label: 'اجمال المدفوع للعام الدراسي السادس :', id: 'totalPaid6', type: 'text' },
+                            { label: 'اجمال المدفوع للعام الدراسي السابع :', id: 'totalPaid7', type: 'text' },
+                            { label: 'اجمال المدفوع للطالب:', id: 'totalPaid', type: 'text' },
+                            { label: 'ملاحظات:', id: 'notes', type: 'text' },
+                            { label: 'التفعيل:', id: 'activation', type: 'select', options: ['0', '1'] }
+                    ];
+    
+    let formData = {};
+    fields.forEach(field => {
+        let inputElement = field.type === 'select' ? createSelect(field.id, field.options) : createInput(field.type, field.id);
+        formData[field.id] = inputElement;
+        formContainer.appendChild(createLabel(field.label, inputElement));
+    });
+    
+    let saveButton = document.createElement('button');
+    saveButton.textContent = 'حفظ';
+    saveButton.onclick = function() {
+        let requestNumber = formData['requestNumber'].value.trim(); // استخراج رقم الطلب
+        if (!requestNumber) {
+            alert('يجب إدخال رقم الطلب قبل الحفظ');
+            return;
+        }
+        
+        let data = { fields: {} };
+        Object.keys(formData).forEach(key => {
+            data.fields[key] = { stringValue: formData[key].value };
+        });
+        
+        fetch(`https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/nomination/${requestNumber}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('تم حفظ البيانات بنجاح');
+        })
+        .catch(error => {
+            alert('حدث خطأ أثناء الحفظ');
+        });
+    };
+    
+    formContainer.appendChild(saveButton);
+    content.appendChild(formContainer);
+    break;
+                
+    case 'activate':
+    content.innerHTML = `
+        <h2 style="text-align:center; color:#1E3A8A; font-family: Arial, sans-serif;">تفعيل حساب وافد</h2>
+<label for="requestNumber" style="font-family: Arial, sans-serif; color: #1E3A8A; font-size: 16px;">رقم الطلب:</label>
+<input type="text" id="requestNumber" placeholder="أدخل رقم الطلب" style="padding: 10px; width: 300px; margin-top: 10px; border: 1px solid #3B82F6; border-radius: 5px; font-size: 14px; display: block; margin-bottom: 20px; background-color: #F3F4F6;">
+
+<button id="fetchBtn" style="background-color: #3B82F6; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: Arial, sans-serif; margin-bottom: 20px;">إظهار الحساب</button>
+
+<div id="accountDetails" style="display:none; margin-top: 20px;">
+    <h3 style="color:#1E3A8A; font-family: Arial, sans-serif;">تفاصيل الحساب</h3>
+    <table border="1" id="accountTable" style="width:100%; text-align:right; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+            <tr style="background-color:#EBF4FF; color:#1E3A8A;">
+                <th style="padding: 10px;">الحقل</th>
+                <th style="padding: 10px;">القيمة</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- البيانات ستظهر هنا عبر JavaScript -->
+        </tbody>
+    </table>
+
+    <label for="groupName" style="font-family: Arial, sans-serif; color: #1E3A8A; font-size: 16px;">اسم الكلية:</label>
+    <select id="groupName" style="padding: 10px; width: 300px; border: 1px solid #3B82F6; border-radius: 5px; background-color: #F3F4F6; margin-bottom: 20px;">
+        <option value="">اختر الكلية</option>
+        <option value="Agriculture">كلية الزراعة</option>
+        <option value="College of Commerce">كلية التجارة</option>
+        <option value="College of Law">كلية الحقوق</option>
+        <option value="CollegeofEducation">كلية التربية</option>
+        <option value="Computers and Information">كلية الحاسبات والمعلومات</option>
+        <option value="Education for Men">كلية تربية رياضية بنين</option>
+        <option value="Education for Women">كلية تربية رياضية بنات</option>
+        <option value="Engineering">كلية الهندسة</option>
+        <option value="Graduate Asian Studies">كلية الدراسات الآسيوية العليا</option>
+        <option value="Nursing">كلية التمريض</option>
+        <option value="Pharmacy">كلية الصيدلة</option>
+        <option value="Science">كلية العلوم</option>
+        <option value="Specific Education">كلية التربية النوعية</option>
+        <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
+        <option value="Veterinary Medicine">كلية الطب البيطري</option>
+    </select>
+
+    <label for="subGroup" style="font-family: Arial, sans-serif; color: #1E3A8A; font-size: 16px;">المستوى:</label>
+    <select id="subGroup" style="padding: 10px; width: 300px; border: 1px solid #3B82F6; border-radius: 5px; background-color: #F3F4F6; margin-bottom: 20px;">
+        <option value="level1">level1</option>
+        <option value="level2">level2</option>
+        <option value="level3">level3</option>
+        <option value="level4">level4</option>
+        <option value="level5">level5</option>
+        <option value="level6">level6</option>
+        <option value="level7">level7</option>
+    </select>
+
+    <button id="registerBtn" style="background-color: #3B82F6; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: Arial, sans-serif;">تفعيل</button>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #F3F4F6;
+        margin: 0;
+        padding: 20px;
+    }
+    h2, h3 {
+        font-family: 'Tahoma', sans-serif;
+        color: #1E3A8A;
+    }
+    input, select, button {
+        font-family: Arial, sans-serif;
+    }
+    input[type="text"], select {
+        background-color: #F3F4F6;
+    }
+    button:hover {
+        background-color: #2563EB;
+        opacity: 0.8;
+    }
+    table th, table td {
+        padding: 12px;
+        text-align: center;
+    }
+    table tr:nth-child(even) {
+        background-color: #EBF4FF;
+    }
+    table th {
+        background-color: #E0F7FF;
+    }
+</style>
+
+    `;
+
+    window.fetchAccount = function () {
+        let requestNumber = document.getElementById("requestNumber").value.trim();
+        if (!requestNumber) {
+            alert("يرجى إدخال رقم الطلب");
+            return;
+        }
+
+        let docPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/nomination/${requestNumber}`;
+        console.log("Fetching from:", docPath);
+
+        fetch(docPath)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Firestore response:", data);
+                if (data.fields) {
+                    let tableBody = document.getElementById("accountTable").querySelector("tbody");
+                    tableBody.innerHTML = "";
+
+                    Object.entries(data.fields).forEach(([key, value]) => {
+                        let row = `<tr><td><strong>${key}</strong></td><td>${value.stringValue || 'غير متوفر'}</td></tr>`;
+                        tableBody.innerHTML += row;
+                    });
+
+                    document.getElementById("accountDetails").style.display = "block";
+                    document.getElementById("accountDetails").setAttribute("data-doc-path", data.name);
+                    document.getElementById("accountDetails").setAttribute("data-doc-fields", JSON.stringify(data.fields));
+                } else {
+                    alert("لم يتم العثور على السجل، تأكد من أن رقم الطلب صحيح.");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                alert("حدث خطأ أثناء جلب البيانات. تحقق من وحدة التحكم لمزيد من التفاصيل.");
+            });
+    };
+
+    window.registerAccount = function () {
+        let requestNumber = document.getElementById("requestNumber").value.trim();
+        let groupName = document.getElementById("groupName").value;
+        let subGroup = document.getElementById("subGroup").value;
+        let docPath = document.getElementById("accountDetails").getAttribute("data-doc-path");
+        let docFields = JSON.parse(document.getElementById("accountDetails").getAttribute("data-doc-fields"));
+
+        if (!groupName || !subGroup) {
+            alert("يرجى اختيار المجموعة والمجموعة الفرعية");
+            return;
+        }
+
+        let newDocPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/${groupName}/level/${subGroup}?documentId=${requestNumber}`;
+
+        let docData = { fields: docFields };
+
+        fetch(newDocPath, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(docData)
+        })
+        .then(response => response.json())
+        .then(() => {
+            if (docPath) {
+                fetch(`https://firestore.googleapis.com/v1/${docPath}`, {
+                    method: "DELETE"
+                })
+                .then(() => alert("تم نقل الحساب بنجاح"))
+                .catch(error => console.error("Error deleting record:", error));
+            }
+        })
+        .catch(error => console.error("Error registering record:", error));
+    };
+
+    document.getElementById("fetchBtn").addEventListener("click", fetchAccount);
+    document.getElementById("registerBtn").addEventListener("click", registerAccount);
+
+    break;
+
+
+                case 'reports':
+                content.innerHTML = `
+        <h2 style="color: #007bff; text-align: center;">طباعه التقارير</h2>
+
+<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <label for="groupName" style="display: block; font-weight: bold; margin-bottom: 8px;">اسم الكلية:</label>
+    <select id="groupName" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+        <option value="">اختر الكلية</option>
+        <option value="Agriculture">كلية الزراعة</option>
+        <option value="College of Commerce">كلية التجارة</option>
+        <option value="College of Law">كلية الحقوق</option>
+        <option value="CollegeofEducation">كلية التربية</option>
+        <option value="Computers and Information">كلية الحاسبات والمعلومات</option>
+        <option value="Education for Men">كلية تربية رياضية بنين</option>
+        <option value="Education for Women">كلية تربية رياضية بنات</option>
+        <option value="Engineering">كلية الهندسة</option>
+        <option value="Graduate Asian Studies">كلية الدراسات الآسيوية العليا</option>
+        <option value="Nursing">كلية التمريض</option>
+        <option value="Pharmacy">كلية الصيدلة</option>
+        <option value="Science">كلية العلوم</option>
+        <option value="Specific Education">كلية التربية النوعية</option>
+        <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
+        <option value="Veterinary Medicine">كلية الطب البيطري</option>
+    </select>
+
+    <label for="subGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى:</label>
+    <select id="subGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+        <option value="level1">level1</option>
+        <option value="level2">level2</option>
+        <option value="level3">level3</option>
+        <option value="level4">level4</option>
+        <option value="level5">level5</option>
+        <option value="level6">level6</option>
+        <option value="level7">level7</option>
+    </select>
+
+    <div style="text-align: center;">
+        <button id="downloadExcel" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; width: 100%; max-width: 200px;">
+            تحميل كملف Excel
+        </button>
+    </div>
+</div>
+
+    `;
+     
+    window.downloadExcel = function () {
+        let groupName = document.getElementById("groupName").value;
+        let subGroup = document.getElementById("subGroup").value;
+    
+        if (!groupName || !subGroup) {
+            alert("يرجى اختيار المجموعة والمجموعة الفرعية");
+            return;
+        }
+    
+        let collectionPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/${groupName}/level/${subGroup}`;
+    
+        fetch(collectionPath)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.documents) {
+                    alert("لم يتم العثور على بيانات في المجموعة الفرعية المحددة.");
+                    return;
+                }
+    
+                let fieldMapping = {
+                    "requestNumber": "رقم الطلب/ رقم النموذج",
+                    "username": "الاســـــــــــــــــــم",
+                    "nationality": "الجنسية",
+                    "civilId": "الرقم المدني",
+                    "gender": "النوع",
+                    "college": "الكلية",
+                    "level": "الفرقة أو الدرجة العلمية",
+                    "certificateCountry": "دولة الشهادة",
+                    "enrollmentYear": "عام الالتحاق",
+                    "studentStatus": "موقف الطالب",
+                    "studentCondition": "حالة الطالب",
+                    "major": "التخصص",
+                    "birthDate": "تاريخ الميلاد",
+                    "address": "محل الإقامة",
+                    "email": "الايميل",
+                    "phone": "رقم التليفون",
+                    "fees": "الرسوم المقررة",
+                    "installment1": "قسط 1",
+                    "paymentDate1": "تاريخ السداد 1",
+                    "transaction1": "رقم الحافظة/ رقم العملية (1)",
+                    "installment2": "قسط 2",
+                    "paymentDate2": "تاريخ السداد 2",
+                    "transaction2": "رقم الحافظة/ رقم العملية (2)",
+                    "totalPaid1": " اجمال المدفوع العام الأول",
+                    "totalPaid2": "اجمال المدفوع العام الثاني",
+                    "totalPaid3": "اجمال المدفوع العام الثالث",
+                    "totalPaid4": "اجمال المدفوع العام الرابع ",
+                    "totalPaid5": "اجمال المدفوع العام الخامس",
+                    "totalPaid6": "اجمال المدفوع العام السادس",
+                    "totalPaid7": "اجمال المدفوع العام السابع",
+                    "totalPaid": "اجمال المدفوع للطالب",
+                    "notes": "ملاحظات",
+                    "activation": "التفعيل"
+                };
+    
+                let excelData = [];
+                data.documents.forEach(doc => {
+                    let rowData = {};
+                    Object.entries(doc.fields).forEach(([key, value]) => {
+                        let arabicKey = fieldMapping[key] || key; // استبدال الاسم بالعربي إذا وُجد
+                        rowData[arabicKey] = value.stringValue || value.integerValue || value.booleanValue || "";
+                    });
+                    excelData.push(rowData);
+                });
+    
+                let wb = XLSX.utils.book_new();
+                let ws = XLSX.utils.json_to_sheet(excelData);
+                XLSX.utils.book_append_sheet(wb, ws, "التقرير");
+                XLSX.writeFile(wb, `${subGroup}.xlsx`);
+            })
+            .catch(error => {
+                console.error("Error fetching data:", error);
+                alert("حدث خطأ أثناء تحميل البيانات.");
+            });
+    };
+    
+    document.getElementById("downloadExcel").addEventListener("click", downloadExcel);
+                    break;
+                case 'update':
+                content.innerHTML = `
+        <h2 style="color: #007bff; text-align: center;">تحديث بيانات</h2>
+
+<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <label for="groupName" style="display: block; font-weight: bold; margin-bottom: 8px;">اسم الكلية:</label>
+    <select id="groupName" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+        <option value="">اختر الكلية</option>
+        <option value="Agriculture">كلية الزراعة</option>
+        <option value="College of Commerce">كلية التجارة</option>
+        <option value="College of Law">كلية الحقوق</option>
+        <option value="CollegeofEducation">كلية التربية</option>
+        <option value="Computers and Information">كلية الحاسبات والمعلومات</option>
+        <option value="Education for Men">كلية تربية رياضية بنين</option>
+        <option value="Education for Women">كلية تربية رياضية بنات</option>
+        <option value="Engineering">كلية الهندسة</option>
+        <option value="Graduate Asian Studies">كلية الدراسات الآسيوية العليا</option>
+        <option value="Nursing">كلية التمريض</option>
+        <option value="Pharmacy">كلية الصيدلة</option>
+        <option value="Science">كلية العلوم</option>
+        <option value="Specific Education">كلية التربية النوعية</option>
+        <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
+        <option value="Veterinary Medicine">كلية الطب البيطري</option>
+    </select>
+
+    <label for="subGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى:</label>
+    <select id="subGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+        <option value="level1">Level 1</option>
+        <option value="level2">Level 2</option>
+        <option value="level3">Level 3</option>
+        <option value="level4">Level 4</option>
+        <option value="level5">Level 5</option>
+        <option value="level6">Level 6</option>
+        <option value="level7">Level 7</option>
+    </select>
+
+    <label for="documentName" style="display: block; font-weight: bold; margin-bottom: 8px;">اسم المستند:</label>
+    <input type="text" id="documentName" placeholder="أدخل اسم المستند" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+
+    <div style="display: flex; justify-content: space-between;">
+        <button id="fetchBtn" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer;">إظهار</button>
+        <button id="updateBtn" style="background-color: #28a745; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; display: none;">تحديث البيانات</button>
+    </div>
+
+    <div id="accountDetails" style="display: none; margin-top: 30px;">
+        <h3 style="color: #007bff;">تفاصيل الحساب</h3>
+        <table border="1" id="accountTable" style="width: 100%; text-align: right; border-radius: 5px; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #007bff; color: white;">
+                    <th style="padding: 10px;">الحقل</th>
+                    <th style="padding: 10px;">القيمة</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <label for="newGroupName" style="display: block; font-weight: bold; margin-top: 20px;">الكلية الجديدة:</label>
+        <select id="newGroupName" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+            <option value="">اختر الكلية</option>
+            <option value="Agriculture">كلية الزراعة</option>
+            <option value="College of Commerce">كلية التجارة</option>
+            <option value="College of Law">كلية الحقوق</option>
+            <option value="CollegeofEducation">كلية التربية</option>
+            <option value="Computers and Information">كلية الحاسبات والمعلومات</option>
+            <option value="Education for Men">كلية تربية رياضية بنين</option>
+            <option value="Education for Women">كلية تربية رياضية بنات</option>
+            <option value="Engineering">كلية الهندسة</option>
+            <option value="Graduate Asian Studies">كلية الدراسات الآسيوية العليا</option>
+            <option value="Nursing">كلية التمريض</option>
+            <option value="Pharmacy">كلية الصيدلة</option>
+            <option value="Science">كلية العلوم</option>
+            <option value="Specific Education">كلية التربية النوعية</option>
+            <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
+            <option value="Veterinary Medicine">كلية الطب البيطري</option>
+        </select>
+
+        <label for="newSubGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى الجديد:</label>
+        <select id="newSubGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+            <option value="level1">Level 1</option>
+            <option value="level2">Level 2</option>
+            <option value="level3">Level 3</option>
+            <option value="level4">Level 4</option>
+            <option value="level5">Level 5</option>
+            <option value="level6">Level 6</option>
+            <option value="level7">Level 7</option>
+        </select>
+
+        <button id="registerBtn" style="background-color: #17a2b8; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer;">نقل المستند</button>
+    </div>
+</div>
+
+    `;
+
+    window.fetchAccount = function () {
+    let groupName = document.getElementById("groupName").value;
+    let subGroup = document.getElementById("subGroup").value;
+    let documentName = document.getElementById("documentName").value.trim();
+    
+    if (!groupName || !subGroup || !documentName) {
+        alert("يرجى تحديد الكلية والمستوى واسم المستند");
+        return;
+    }
+    
+    let docPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/${groupName}/level/${subGroup}/${documentName}`;
+    
+    fetch(docPath)
+        .then(response => response.json())
+        .then(data => {
+            if (data.fields) {
+                let tableBody = document.getElementById("accountTable").querySelector("tbody");
+                tableBody.innerHTML = "";
+                
+                Object.entries(data.fields).forEach(([key, value]) => {
+                    let row = `<tr>
+                        <td><strong>${key}</strong></td>
+                        <td><input type="text" class="editable" data-key="${key}" value="${value.stringValue || ''}"></td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+                
+                document.getElementById("accountDetails").style.display = "block";
+                document.getElementById("accountDetails").setAttribute("data-doc-path", docPath);
+                document.getElementById("updateBtn").style.display = "block";
+            } else {
+                alert("لم يتم العثور على السجل، تأكد من صحة البيانات المدخلة.");
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching document:", error);
+            alert("حدث خطأ أثناء جلب البيانات.");
+        });
+};
+
+window.updateAccount = function () {
+    let docPath = document.getElementById("accountDetails").getAttribute("data-doc-path");
+    let inputs = document.querySelectorAll(".editable");
+    let updatedData = {};
+    
+    inputs.forEach(input => {
+        let key = input.getAttribute("data-key");
+        updatedData[key] = { stringValue: input.value };
+    });
+    
+    fetch(docPath, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fields: updatedData })
+    })
+    .then(() => alert("تم تحديث البيانات بنجاح"))
+    .catch(error => {
+        console.error("Error updating document:", error);
+        alert("حدث خطأ أثناء تحديث البيانات.");
+    });
+};
+
+    window.registerDocument = function () {
+        let newGroupName = document.getElementById("newGroupName").value;
+        let newSubGroup = document.getElementById("newSubGroup").value;
+        let oldDocPath = document.getElementById("accountDetails").getAttribute("data-doc-path");
+        let documentName = document.getElementById("documentName").value.trim();
+
+        if (!newGroupName || !newSubGroup || !documentName) {
+            alert("يرجى اختيار الكلية والمستوى الجديد وإدخال رقم الطلب لنقل المستند");
+            return;
+        }
+
+        fetch(oldDocPath)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.fields) {
+                    alert("لا توجد بيانات لنقلها");
+                    return;
+                }
+
+                let newDocPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/${newGroupName}/level/${newSubGroup}/${documentName}`;
+
+                return fetch(newDocPath, {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ fields: data.fields })
+                }).then(() => fetch(oldDocPath, { method: "DELETE" }));
+            })
+            .then(() => alert("تم نقل المستند بنجاح"))
+            .catch(error => console.error("Error moving document:", error));
+    };
+
+    document.getElementById("registerBtn").addEventListener("click", registerDocument);
+    document.getElementById("fetchBtn").addEventListener("click", fetchAccount);
+    document.getElementById("updateBtn").addEventListener("click", updateAccount);
+                    break;
+     case 'help':
+     content.innerHTML = `
+        <h2 style="color: #007bff; text-align: center;">فيديو تعريفي عن الموقع</h2>
+
+        <div style="max-width: 900px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <h3 style="text-align: center;">شاهد الفيديو التعريفي عن خدمات الموقع</h3>
+            <div style="text-align: center;">
+                <video width="560" height="315" controls>
+                    <source src="photo/bandicam.mp4" type="video/mp4">
+                    <p>متصفحك لا يدعم تشغيل الفيديو</p>
+                </video>
+            </div>
+        </div>
+    `;
+    break;
+            }
+        }
+    </script>
+</body>
+</html>

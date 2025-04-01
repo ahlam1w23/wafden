@@ -1,0 +1,193 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    position: relative;
+    min-height: 100vh; /* التأكد من أن الجسم يمتد على ارتفاع الشاشة */
+}
+
+.background-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#background-video {
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)); /* تدرج لوني */
+    padding: 10px 20px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* إضافة ظل للشريط العلوي */
+    transition: background 0.3s ease; /* تأثير انتقال عند التمرير */
+}
+
+.navbar:hover {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)); /* تغيير التدرج عند التمرير */
+}
+
+.logo {
+    width: 80px; /* يمكنك تعديل العرض حسب الحاجة */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    position: relative; /* إضافة موضع نسبي لتطبيق التأثير */
+}
+
+.nav-links a:hover {
+    color: #4CAF50; /* تغيير لون النص عند التمرير */
+}
+
+.nav-links a:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #4CAF50; /* لون الخط السفلي */
+    transition: width 0.3s; /* تأثير انتقال لعرض الخط */
+    margin: auto; /* توسيط الخط */
+}
+
+.nav-links a:hover:after {
+    width: 100%; /* زيادة العرض عند التمرير */
+}
+
+.login-btn-container {
+    position: relative; /* تغيير من absolute إلى relative */
+    display: flex; /* إضافة flexbox للتوسيع التلقائي */
+    justify-content: center; /* توسيط الزر */
+    margin-top: 40px; /* زيادة المسافة بين الشريط العلوي والزر */
+    z-index: 1; /* تأكيد أن الزر في المقدمة */
+}
+
+.register-button {
+    background-color: #4CAF50; /* لون الزر */
+    color: white; /* لون النص */
+    padding: 15px 30px; /* الحشو */
+    border: none; /* إزالة الحدود */
+    border-radius: 5px; /* زوايا مستديرة */
+    cursor: pointer; /* شكل المؤشر */
+    font-size: 1.2em; /* حجم الخط */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير انتقال */
+}
+
+.register-button:hover {
+    background-color: #45a049; /* لون مختلف عند التمرير */
+    transform: scale(1.05); /* تكبير الزر عند التمرير */
+}
+
+.modal {
+    display: none; /* مخفي في البداية */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4); /* لون خلفية مع الشفافية */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* تأثير لون على hover */
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 60px; /* زيادة المسافة أعلى البطاقات */
+    margin-bottom: 40px; /* زيادة المسافة أسفل البطاقات */
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* زيادة الظل */
+    width: 15%; /* تصغير العرض */
+    text-align: center;
+    overflow: hidden;
+    transition: transform 0.5s, box-shadow 0.5s, background-color 0.5s; /* إضافة انتقالات سلسة */
+}
+
+.card:hover {
+    transform: scale(1.05); /* تكبير البطاقة عند التمرير */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* زيادة الظل عند التمرير */
+    background-color: #f0f0f0; /* تغيير لون الخلفية عند التمرير */
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 50px;
+    width: 100%;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease; /* تأثير الانتقال على الأيقونات الاجتماعية */
+}
+
+.social-icons img:hover {
+    transform: scale(1.2); /* تكبير الأيقونات عند التمرير */
+}
