@@ -27,6 +27,7 @@
         <button onclick="loadContent('update')">تحديث بيانات الحسابات  </button>
         <button onclick="loadContent('reports')">طباعة تقارير</button>
         <button onclick="loadContent('fees')">رسوم الخدمات</button>
+        <button onclick="loadContent('twsl')"> تواصل</button>
         <button onclick="loadContent('help')"> فيديو تعريفي </button>
     </div>
     
@@ -82,6 +83,81 @@
 
     `;
     break;
+
+
+    case 'twsl':
+    content.innerHTML = `
+    <div style="max-width: 600px; margin: auto; background: #f0f8ff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);">
+        <h2 style="text-align: center; color: #0056b3; font-family: Arial, sans-serif;">إرسال المشكلة</h2>
+        
+        <div id="emailInputs">
+            <div class="email-container" style="margin-bottom: 10px;">
+                <input type="email" class="email" placeholder="أدخل البريد الإلكتروني" style="width: 90%; padding: 10px; border: 1px solid #007bff; border-radius: 5px; display: block; margin: auto;">
+            </div>
+        </div>
+        
+        <button onclick="addEmailInput()" style="background-color: #0056b3; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: Arial, sans-serif; display: block; margin: 10px auto;">إضافة بريد إلكتروني آخر</button>
+        
+        <textarea id="issueText" placeholder="اكتب المشكلة هنا" style="width: 90%; padding: 10px; height: 100px; border: 1px solid #007bff; border-radius: 5px; display: block; margin: 10px auto;"></textarea>
+        
+        <button onclick="sendEmails()" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-family: Arial, sans-serif; display: block; margin: 10px auto;">إرسال</button>
+    </div>
+`;
+
+// إضافة سكريبت EmailJS إذا لم يكن موجودًا
+if (!document.getElementById('emailScript')) {
+    let script = document.createElement('script');
+    script.id = 'emailScript';
+    script.src = "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+    script.onload = function() {
+        emailjs.init("b-HskPKXolCBZDlDA"); // استبدل هذا بمعرف EmailJS الخاص بك
+    };
+    document.body.appendChild(script);
+}
+
+// دالة لإضافة حقول إدخال البريد الإلكتروني
+window.addEmailInput = function() {
+    let container = document.createElement("div");
+    container.classList.add("email-container");
+    container.innerHTML = '<input type="email" class="email" placeholder="أدخل البريد الإلكتروني" style="width: 90%; padding: 10px; border: 1px solid #007bff; border-radius: 5px; display: block; margin: auto; margin-top: 10px;">';
+    document.getElementById("emailInputs").appendChild(container);
+};
+
+// دالة لإرسال البريد الإلكتروني لجميع العناوين المدخلة
+window.sendEmails = function() {
+    let emails = Array.from(document.querySelectorAll(".email"))
+                     .map(input => input.value.trim())
+                     .filter(email => email !== "");
+    let issueText = document.getElementById("issueText").value.trim();
+
+    if (emails.length === 0 || issueText === "") {
+        alert("يرجى إدخال البريد الإلكتروني والمشكلة.");
+        return;
+    }
+
+    let templateParams = {
+        from_name: "شئون الطلاب الوافدين - جامعة الزقازيق",
+        to_email: emails.join(","), // إرسال إلى جميع العناوين
+        message: issueText,
+        reply_to: emails[0] // الرد على أول بريد مدخل
+    };
+
+    emailjs.send("service_1cmjpt8", "template_cyu7nxe", templateParams)
+        .then(response => {
+            console.log("تم الإرسال بنجاح إلى", emails);
+            alert("تم إرسال المشكلة بنجاح لجميع العناوين!");
+        })
+        .catch(error => {
+            console.error("خطأ في الإرسال", error);
+            alert("حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقًا.");
+        });
+};
+
+
+
+    break;
+
+
 
 
                case 'Nominations':
@@ -306,6 +382,7 @@
                             { label: 'تاريخ الميلاد:', id: 'birthDate', type: 'date' },
                             { label: 'محل الإقامة:', id: 'address', type: 'text' },
                             { label: 'الايميل:', id: 'email', type: 'email' },
+                            { label: 'الايميل الجامعي: ', id: 'emailcoldg', type: 'email' },
                             { label: 'رقم التليفون:', id: 'phone', type: 'text' },
                             { label: 'الرسوم المقررة:', id: 'fees', type: 'text' },
                             { label: 'قسط 1:', id: 'installment1', type: 'text' },
@@ -532,129 +609,170 @@
     break;
 
 
-                case 'reports':
-                content.innerHTML = `
-        <h2 style="color: #007bff; text-align: center;">طباعه التقارير</h2>
+    case 'reports':
+    content.innerHTML = `
+    <h2 style="color: #007bff; text-align: center;">طباعه التقارير</h2>
 
-<div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-    <label for="groupName" style="display: block; font-weight: bold; margin-bottom: 8px;">اسم الكلية:</label>
-    <select id="groupName" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
-        <option value="">اختر الكلية</option>
-        <option value="Agriculture">كلية الزراعة</option>
-        <option value="College of Commerce">كلية التجارة</option>
-        <option value="College of Law">كلية الحقوق</option>
-        <option value="CollegeofEducation">كلية التربية</option>
-        <option value="Computers and Information">كلية الحاسبات والمعلومات</option>
-        <option value="Education for Men">كلية تربية رياضية بنين</option>
-        <option value="Education for Women">كلية تربية رياضية بنات</option>
-        <option value="Engineering">كلية الهندسة</option>
-        <option value="Graduate Asian Studies">كلية الدراسات الآسيوية العليا</option>
-        <option value="Nursing">كلية التمريض</option>
-        <option value="Pharmacy">كلية الصيدلة</option>
-        <option value="Science">كلية العلوم</option>
-        <option value="Specific Education">كلية التربية النوعية</option>
-        <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
-        <option value="Veterinary Medicine">كلية الطب البيطري</option>
-    </select>
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <label for="groupName" style="display: block; font-weight: bold; margin-bottom: 8px;">اسم الكلية:</label>
+        <select id="groupName" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+            <option value="">اختر الكلية</option>
+            <option value="Agriculture">كلية الزراعة</option>
+            <option value="College of Commerce">كلية التجارة</option>
+            <option value="College of Law">كلية الحقوق</option>
+            <option value="CollegeofEducation">كلية التربية</option>
+            <option value="Computers and Information">كلية الحاسبات والمعلومات</option>
+            <option value="Education for Men">كلية تربية رياضية بنين</option>
+            <option value="Education for Women">كلية تربية رياضية بنات</option>
+            <option value="Engineering">كلية الهندسة</option>
+            <option value="Graduate Asian Studies">كلية الدراسات الآسيوية العليا</option>
+            <option value="Nursing">كلية التمريض</option>
+            <option value="Pharmacy">كلية الصيدلة</option>
+            <option value="Science">كلية العلوم</option>
+            <option value="Specific Education">كلية التربية النوعية</option>
+            <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
+            <option value="Veterinary Medicine">كلية الطب البيطري</option>
+        </select>
 
-    <label for="subGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى:</label>
-    <select id="subGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
-        <option value="level1">level1</option>
-        <option value="level2">level2</option>
-        <option value="level3">level3</option>
-        <option value="level4">level4</option>
-        <option value="level5">level5</option>
-        <option value="level6">level6</option>
-        <option value="level7">level7</option>
-    </select>
+        <label for="subGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى:</label>
+        <select id="subGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+            <option value="level1">level1</option>
+            <option value="level2">level2</option>
+            <option value="level3">level3</option>
+            <option value="level4">level4</option>
+            <option value="level5">level5</option>
+            <option value="level6">level6</option>
+            <option value="level7">level7</option>
+        </select>
 
-    <div style="text-align: center;">
-        <button id="downloadExcel" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; width: 100%; max-width: 200px;">
-            تحميل كملف Excel
-        </button>
+        <div style="text-align: center;">
+            <button id="downloadExcel" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; width: 100%; max-width: 200px;">
+                تحميل كملف Excel
+            </button>
+        </div>
     </div>
-</div>
-
     `;
-     
+
     window.downloadExcel = function () {
-        let groupName = document.getElementById("groupName").value;
-        let subGroup = document.getElementById("subGroup").value;
-    
-        if (!groupName || !subGroup) {
-            alert("يرجى اختيار المجموعة والمجموعة الفرعية");
-            return;
-        }
-    
-        let collectionPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/${groupName}/level/${subGroup}`;
-    
-        fetch(collectionPath)
-            .then(response => response.json())
-            .then(data => {
-                if (!data.documents) {
-                    alert("لم يتم العثور على بيانات في المجموعة الفرعية المحددة.");
-                    return;
-                }
-    
-                let fieldMapping = {
-                    "requestNumber": "رقم الطلب/ رقم النموذج",
-                    "username": "الاســـــــــــــــــــم",
-                    "nationality": "الجنسية",
-                    "civilId": "الرقم المدني",
-                    "gender": "النوع",
-                    "college": "الكلية",
-                    "level": "الفرقة أو الدرجة العلمية",
-                    "certificateCountry": "دولة الشهادة",
-                    "enrollmentYear": "عام الالتحاق",
-                    "studentStatus": "موقف الطالب",
-                    "studentCondition": "حالة الطالب",
-                    "major": "التخصص",
-                    "birthDate": "تاريخ الميلاد",
-                    "address": "محل الإقامة",
-                    "email": "الايميل",
-                    "phone": "رقم التليفون",
-                    "fees": "الرسوم المقررة",
-                    "installment1": "قسط 1",
-                    "paymentDate1": "تاريخ السداد 1",
-                    "transaction1": "رقم الحافظة/ رقم العملية (1)",
-                    "installment2": "قسط 2",
-                    "paymentDate2": "تاريخ السداد 2",
-                    "transaction2": "رقم الحافظة/ رقم العملية (2)",
-                    "totalPaid1": " اجمال المدفوع العام الأول",
-                    "totalPaid2": "اجمال المدفوع العام الثاني",
-                    "totalPaid3": "اجمال المدفوع العام الثالث",
-                    "totalPaid4": "اجمال المدفوع العام الرابع ",
-                    "totalPaid5": "اجمال المدفوع العام الخامس",
-                    "totalPaid6": "اجمال المدفوع العام السادس",
-                    "totalPaid7": "اجمال المدفوع العام السابع",
-                    "totalPaid": "اجمال المدفوع للطالب",
-                    "notes": "ملاحظات",
-                    "activation": "التفعيل"
-                };
-    
-                let excelData = [];
-                data.documents.forEach(doc => {
-                    let rowData = {};
-                    Object.entries(doc.fields).forEach(([key, value]) => {
-                        let arabicKey = fieldMapping[key] || key; // استبدال الاسم بالعربي إذا وُجد
-                        rowData[arabicKey] = value.stringValue || value.integerValue || value.booleanValue || "";
-                    });
-                    excelData.push(rowData);
-                });
-    
-                let wb = XLSX.utils.book_new();
-                let ws = XLSX.utils.json_to_sheet(excelData);
-                XLSX.utils.book_append_sheet(wb, ws, "التقرير");
-                XLSX.writeFile(wb, `${subGroup}.xlsx`);
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-                alert("حدث خطأ أثناء تحميل البيانات.");
-            });
+    let groupName = document.getElementById("groupName").value;
+    let subGroup = document.getElementById("subGroup").value;
+
+    if (!groupName || !subGroup) {
+        alert("يرجى اختيار المجموعة والمجموعة الفرعية");
+        return;
+    }
+
+    let collectionPath = `https://firestore.googleapis.com/v1/projects/wfdenmohamed/databases/(default)/documents/${groupName}/level/${subGroup}`;
+    let allData = []; // مصفوفة لتخزين جميع البيانات
+
+    let lastVisible = null; // لتحديد السجل الأخير المحمّل
+    let batchSize = 1000; // عدد السجلات في كل استعلام
+
+    // خريطة الحقول بالعربية
+    let fieldMapping = {
+        "requestNumber": "رقم الطلب/ رقم النموذج",
+        "username": "الاســـــــــــــــــــم",
+        "nationality": "الجنسية",
+        "civilId": "الرقم المدني",
+        "gender": "النوع",
+        "college": "الكلية",
+        "level": "الفرقة أو الدرجة العلمية",
+        "certificateCountry": "دولة الشهادة",
+        "enrollmentYear": "عام الالتحاق",
+        "studentStatus": "موقف الطالب",
+        "studentCondition": "حالة الطالب",
+        "major": "التخصص",
+        "birthDate": "تاريخ الميلاد",
+        "address": "محل الإقامة",
+        "email": "الايميل",
+        "emailcoldg": "الايميل الجامعي",
+        "phone": "رقم التليفون",
+        "fees": "الرسوم المقررة",
+        "installment1": "قسط 1",
+        "paymentDate1": "تاريخ السداد 1",
+        "transaction1": "رقم الحافظة/ رقم العملية (1)",
+        "installment2": "قسط 2",
+        "paymentDate2": "تاريخ السداد 2",
+        "transaction2": "رقم الحافظة/ رقم العملية (2)",
+        "totalPaid1": " اجمال المدفوع العام الأول",
+        "totalPaid2": "اجمال المدفوع العام الثاني",
+        "totalPaid3": "اجمال المدفوع العام الثالث",
+        "totalPaid4": "اجمال المدفوع العام الرابع ",
+        "totalPaid5": "اجمال المدفوع العام الخامس",
+        "totalPaid6": "اجمال المدفوع العام السادس",
+        "totalPaid7": "اجمال المدفوع العام السابع",
+        "totalPaid": "اجمال المدفوع للطالب",
+        "notes": "ملاحظات",
+        "activation": "التفعيل"
     };
-    
-    document.getElementById("downloadExcel").addEventListener("click", downloadExcel);
-                    break;
+
+    // ترتيب الحقول كما تم تحديده
+    let fieldOrder = [
+        "requestNumber", "username", "nationality", "civilId", "gender", "college", "level", "certificateCountry",
+        "enrollmentYear", "studentStatus", "studentCondition", "major", "birthDate", "address", "email", "emailcoldg",
+        "phone", "fees", "installment1", "paymentDate1", "transaction1", "installment2", "paymentDate2", "transaction2",
+        "totalPaid1", "totalPaid2", "totalPaid3", "totalPaid4", "totalPaid5", "totalPaid6", "totalPaid7", "totalPaid",
+        "notes", "activation"
+    ];
+
+    function fetchData() {
+        let url = `${collectionPath}?pageSize=${batchSize}`;
+        if (lastVisible) {
+            url += `&startAfter=${lastVisible}`;
+        }
+
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.documents || data.documents.length === 0) {
+                console.log('تم تحميل جميع البيانات');
+                processAndDownload(allData); // تحميل البيانات بعد أن يتم تحميل جميع السجلات
+                return;
+            }
+
+            data.documents.forEach(doc => {
+                let rowData = {};
+                Object.entries(doc.fields).forEach(([key, value]) => {
+                    let arabicKey = fieldMapping[key] || key; // استبدال الاسم بالعربي إذا وُجد
+                    rowData[arabicKey] = value.stringValue || value.integerValue || value.booleanValue || "";
+                });
+                allData.push(rowData); // جمع البيانات
+            });
+
+            lastVisible = data.documents[data.documents.length - 1].name; // تحديث السجل الأخير
+            fetchData(); // تابع تحميل الدفعة التالية
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+            alert("حدث خطأ أثناء تحميل البيانات.");
+        });
+    }
+
+    // استدعاء الدالة لتحميل البيانات
+    fetchData();
+
+    // دالة معالجة وتحميل البيانات في ملف Excel بعد تحميل جميع السجلات
+    function processAndDownload(data) {
+        // ترتيب البيانات وفقًا لترتيب الحقول
+        let orderedData = data.map(row => {
+            let orderedRow = {};
+            fieldOrder.forEach(field => {
+                let arabicField = fieldMapping[field];
+                orderedRow[arabicField] = row[arabicField] || "";
+            });
+            return orderedRow;
+        });
+
+        let wb = XLSX.utils.book_new();
+        let ws = XLSX.utils.json_to_sheet(orderedData);
+        XLSX.utils.book_append_sheet(wb, ws, "التقرير");
+        XLSX.writeFile(wb, `${subGroup}.xlsx`);
+    }
+};
+
+document.getElementById("downloadExcel").addEventListener("click", downloadExcel);
+    break;
+
                 case 'update':
                 content.innerHTML = `
         <h2 style="color: #007bff; text-align: center;">تحديث بيانات</h2>
