@@ -372,7 +372,7 @@ window.sendEmails = function() {
                             { label: 'الجنسية:', id: 'nationality', type: 'select', options: ['مصر', 'السودان', ' ليبيا', ' تونس', 'الجزائر', 'المغرب', 'موريتانيا', ' الصومال', 'جيبوتي', 'جزر القمر', 'الأردن', 'سوريا', 'لبنان', ' فلسطين', 'العراق', 'الإمارات العربية المتحدة', 'البحرين', 'الكويت', 'السعودية', 'اليمن', 'قطر', 'عُمان', 'الصين'] },
                             { label: 'الرقم المدني:', id: 'civilId', type: 'text' },
                             { label: 'النوع:', id: 'gender', type: 'select', options: ['ذكر', 'أنثى'] },
-                            { label: 'الكلية:', id: 'college', type: 'select', options: [' كلية التجارة ', 'كلية التربية  ', 'كلية التربية الرياضية بنات ', 'كلية التربية الرياضية بنين ', 'كلية التربية النوعية ', 'كلية التكنولوجيا والتنمية ', 'كلية التمريض ', 'كلية الحاسبات والمعلومات ', 'كلية الحقوق ', 'كلية الدراسات الآسيوية العليا', 'كلية الزراعة ', 'كلية الصيدلة ', 'كلية الطب البيطري', 'كلية العلوم', 'كلية الهندسة '] },
+                            { label: 'الكلية:', id: 'college', type: 'select', options: [' كلية التجارة ','كلية الآداب', 'كلية التربية  ', 'كلية التربية الرياضية بنات ', 'كلية التربية الرياضية بنين ', 'كلية التربية النوعية ', 'كلية التكنولوجيا والتنمية ', 'كلية التمريض ', 'كلية الحاسبات والمعلومات ', 'كلية الحقوق ', 'كلية الدراسات الآسيوية العليا', 'كلية الزراعة ', 'كلية الصيدلة ','كلية الطب البشري الزقازيق','طب فاقوس','طب وجراحة الفم والاسنان','كلية الطب البيطري', 'كلية العلوم','كلية علوم الاعاقة', 'كلية الهندسة '] },
                             { label: 'الفرقة أو الدرجة العلمية:', id: 'level', type: 'select', options: ['الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة', 'السابعة'] },
                             { label: 'دولة الشهادة:', id: 'certificateCountry', type: 'text' },
                             { label: 'عام الالتحاق:', id: 'enrollmentYear', type: 'select', options: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032', '2033', '2034', '2035', '2036', '2037', '2038', '2039', '2040'] },
@@ -482,6 +482,11 @@ window.sendEmails = function() {
         <option value="Specific Education">كلية التربية النوعية</option>
         <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
         <option value="Veterinary Medicine">كلية الطب البيطري</option>
+        <option value="Faculty of Arts">كلية الآداب</option>
+        <option value="Medicine Zagazig">كلية الطب البشري الزقازيق</option>
+        <option value="Faqous Medicine">طب فاقوس</option>
+        <option value="Oral and Dental Surgery">طب وجراحة الفم والاسنان</option>
+        <option value="Disability Sciences">علوم الاعاقة</option>
     </select>
 
     <label for="subGroup" style="font-family: Arial, sans-serif; color: #1E3A8A; font-size: 16px;">المستوى:</label>
@@ -632,7 +637,12 @@ window.sendEmails = function() {
             <option value="Specific Education">كلية التربية النوعية</option>
             <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
             <option value="Veterinary Medicine">كلية الطب البيطري</option>
-        </select>
+            <option value="Faculty of Arts">كلية الآداب</option>
+            <option value="Medicine Zagazig">كلية الطب البشري الزقازيق</option>
+            <option value="Faqous Medicine">طب فاقوس</option>
+            <option value="Oral and Dental Surgery">طب وجراحة الفم والاسنان</option>
+            <option value="Disability Sciences">علوم الاعاقة</option>
+            </select>
 
         <label for="subGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى:</label>
         <select id="subGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
@@ -796,6 +806,11 @@ document.getElementById("downloadExcel").addEventListener("click", downloadExcel
         <option value="Specific Education">كلية التربية النوعية</option>
         <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
         <option value="Veterinary Medicine">كلية الطب البيطري</option>
+        <option value="Faculty of Arts">كلية الآداب</option>
+        <option value="Medicine Zagazig">كلية الطب البشري الزقازيق</option>
+        <option value="Faqous Medicine">طب فاقوس</option>
+        <option value="Oral and Dental Surgery">طب وجراحة الفم والاسنان</option>
+        <option value="Disability Sciences">علوم الاعاقة</option>
     </select>
 
     <label for="subGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى:</label>
@@ -809,8 +824,8 @@ document.getElementById("downloadExcel").addEventListener("click", downloadExcel
         <option value="level7">Level 7</option>
     </select>
 
-    <label for="documentName" style="display: block; font-weight: bold; margin-bottom: 8px;">اسم المستند:</label>
-    <input type="text" id="documentName" placeholder="أدخل اسم المستند" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+    <label for="documentName" style="display: block; font-weight: bold; margin-bottom: 8px;">رقم الطلب :</label>
+    <input type="text" id="documentName" placeholder="أدخل  رقم الطلب" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
 
     <div style="display: flex; justify-content: space-between;">
         <button id="fetchBtn" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer;">إظهار</button>
@@ -847,6 +862,11 @@ document.getElementById("downloadExcel").addEventListener("click", downloadExcel
             <option value="Specific Education">كلية التربية النوعية</option>
             <option value="Technology and Development">كلية التكنولوجيا والتنمية</option>
             <option value="Veterinary Medicine">كلية الطب البيطري</option>
+            <option value="Faculty of Arts">كلية الآداب</option>
+            <option value="Medicine Zagazig">كلية الطب البشري الزقازيق</option>
+            <option value="Faqous Medicine">طب فاقوس</option>
+            <option value="Oral and Dental Surgery">طب وجراحة الفم والاسنان</option>
+            <option value="Disability Sciences">علوم الاعاقة</option>
         </select>
 
         <label for="newSubGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى الجديد:</label>
