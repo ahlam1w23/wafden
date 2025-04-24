@@ -373,7 +373,7 @@ window.sendEmails = function() {
                             { label: 'الرقم المدني:', id: 'civilId', type: 'text' },
                             { label: 'النوع:', id: 'gender', type: 'select', options: ['ذكر', 'أنثى'] },
                             { label: 'الكلية:', id: 'college', type: 'select', options: [' كلية التجارة ','كلية الآداب', 'كلية التربية  ', 'كلية التربية الرياضية بنات ', 'كلية التربية الرياضية بنين ', 'كلية التربية النوعية ', 'كلية التكنولوجيا والتنمية ', 'كلية التمريض ', 'كلية الحاسبات والمعلومات ', 'كلية الحقوق ', 'كلية الدراسات الآسيوية العليا', 'كلية الزراعة ', 'كلية الصيدلة ','كلية الطب البشري الزقازيق','طب فاقوس','طب وجراحة الفم والاسنان','كلية الطب البيطري', 'كلية العلوم','كلية علوم الاعاقة', 'كلية الهندسة '] },
-                            { label: 'الفرقة أو الدرجة العلمية:', id: 'level', type: 'select', options: ['الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة', 'السابعة'] },
+                            { label: 'الفرقة أو الدرجة العلمية:', id: 'level', type: 'select', options: ['أعدادي','الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة', 'السابعة'] },
                             { label: 'دولة الشهادة:', id: 'certificateCountry', type: 'text' },
                             { label: 'عام الالتحاق:', id: 'enrollmentYear', type: 'select', options: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032', '2033', '2034', '2035', '2036', '2037', '2038', '2039', '2040'] },
                             { label: 'موقف الطالب:', id: 'studentStatus', type: 'select', options: ['منحة', 'نفقة خاصة', 'تخفيض 50%'] },
@@ -491,6 +491,7 @@ window.sendEmails = function() {
 
     <label for="subGroup" style="font-family: Arial, sans-serif; color: #1E3A8A; font-size: 16px;">المستوى:</label>
     <select id="subGroup" style="padding: 10px; width: 300px; border: 1px solid #3B82F6; border-radius: 5px; background-color: #F3F4F6; margin-bottom: 20px;">
+        <option value="level0">أعدادي</option>
         <option value="level1">level1</option>
         <option value="level2">level2</option>
         <option value="level3">level3</option>
@@ -646,6 +647,7 @@ window.sendEmails = function() {
 
         <label for="subGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى:</label>
         <select id="subGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+            <option value="level0">أعدادي</option>
             <option value="level1">level1</option>
             <option value="level2">level2</option>
             <option value="level3">level3</option>
@@ -815,6 +817,7 @@ document.getElementById("downloadExcel").addEventListener("click", downloadExcel
 
     <label for="subGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى:</label>
     <select id="subGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+        <option value="level0">أعدادي</option>
         <option value="level1">Level 1</option>
         <option value="level2">Level 2</option>
         <option value="level3">Level 3</option>
@@ -871,6 +874,7 @@ document.getElementById("downloadExcel").addEventListener("click", downloadExcel
 
         <label for="newSubGroup" style="display: block; font-weight: bold; margin-bottom: 8px;">المستوى الجديد:</label>
         <select id="newSubGroup" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #007bff;">
+            <option value="level0">أعدادي</option>
             <option value="level1">Level 1</option>
             <option value="level2">Level 2</option>
             <option value="level3">Level 3</option>
